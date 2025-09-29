@@ -523,9 +523,7 @@ class PdfPageViewState extends State<PdfPageView> {
                       if ((selectionDetails.mouseSelectionEnabled || selectionDetails.selectionEnabled) &&
                           isPrimaryKeyPressed &&
                           event.logicalKey == LogicalKeyboardKey.keyC) {
-                        Clipboard.setData(
-                          ClipboardData(text: selectionDetails.copiedText ?? ''),
-                        );
+                        Clipboard.setData(ClipboardData(text: selectionDetails.copiedText ?? ''));
                       }
                     }
                     if (isPrimaryKeyPressed && event.logicalKey == LogicalKeyboardKey.digit0) {
