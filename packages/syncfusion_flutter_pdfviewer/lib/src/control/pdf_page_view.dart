@@ -518,15 +518,15 @@ class PdfPageViewState extends State<PdfPageView> {
                     final bool isPrimaryKeyPressed = kIsMacOS
                         ? HardwareKeyboard.instance.isMetaPressed
                         : HardwareKeyboard.instance.isControlPressed;
-                    if (canvasRenderBox != null &&
-                        (canvasRenderBox?.getSelectionDetails().mouseSelectionEnabled ??
-                            false || canvasRenderBox?.getSelectionDetails().selectionEnabled ??
-                            false) &&
-                        isPrimaryKeyPressed &&
-                        event.logicalKey == LogicalKeyboardKey.keyC) {
-                      Clipboard.setData(
-                        ClipboardData(text: canvasRenderBox?.getSelectionDetails().copiedText ?? ''),
-                      );
+                    if (canvasRenderBox != null) {
+                      final selectionDetails = canvasRenderBox.getSelectionDetails();
+                      if ((selectionDetails.mouseSelectionEnabled || selectionDetails.selectionEnabled) &&
+                          isPrimaryKeyPressed &&
+                          event.logicalKey == LogicalKeyboardKey.keyC) {
+                        Clipboard.setData(
+                          ClipboardData(text: selectionDetails.copiedText ?? ''),
+                        );
+                      }
                     }
                     if (isPrimaryKeyPressed && event.logicalKey == LogicalKeyboardKey.digit0) {
                       widget.pdfViewerController.zoomLevel = 1.0;
